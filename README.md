@@ -1,15 +1,23 @@
+# CCTC Notes  
+**Matthew Willis**
 
-<a name="my-custom-anchor-point"></a>
-CCTC notes by **Matthew Willis**
+---
 
+## 📅 Day One
+**Topic:** PowerShell  
 
-day one notes: [powershell]([https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax](https://github.com/halfopenhearts/cctc/blob/main/day1.md)).
-> EOD **::** Cmdlets + pipelines enable scalable automation
+📄 Notes: [PowerShell Basics](./day1.md)  
+> **EOD:** Cmdlets and pipelines enable scalable automation.
 
-day two notes: [windows reg edit and multi stream]([https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax](https://github.com/halfopenhearts/cctc/blob/main/day2.md)).
-> EOD **::** Registry + artifacts
+---
 
+## 📅 Day Two
+**Topic:** Windows Registry & Alternate Data Streams  
 
+📄 Notes: [Registry Editing & ADS](./day2.md)  
+> **EOD:** Registry analysis reveals valuable forensic artifacts.
 
+---
 
-editing: [markup](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+## ✏️ Editing / Reference
+- [GitHub Markdown Guide](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
