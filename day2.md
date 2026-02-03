@@ -87,7 +87,41 @@ Registry Artifacts
 
 Examples:
 - Leftover CAC certificates
+
+
+
 - USB device history
 
 Example Path:
 HKLM\SYSTEM\CurrentControlSet\Enum\USB\...
+
+
+
+
+
+ADS in NTFS
+- compatible with HFS+,NWFS
+
+NTFS
+- attributes
+- security
+- main streams
+- alternate streams
+- only mainstream ($DATA) is visible by default
+
+they exist' to store icons, thumbnails, file attributes
+ - allow multiple data streams per file without altering visible content
+
+
+
+ADS example :: [filename]:[stream_name]:$DATA
+  - removed when copied over to FAT32 , does not change hash
+  - to put hidden data in : echo secret data > [filename]:[stream_name]
+  - to read the hidden data use 'more < [filename]:[stream_name]
+
+
+
+
+
+
+
