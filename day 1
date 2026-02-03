@@ -1,0 +1,49 @@
+MATTHEW_WILLIS,10.50.15.85
+download "omnisa" to rdp for homework
+
+
+day 1 lecture take away notes:
+  cmdlet pattern: verb-noun (singular noun)
+  usually starts with '-'
+  cmdlet , param, arg
+
+
+    $_ -- current object flowing through a pipeline '|'
+
+    SIM -
+    CLASS - blue print or form . what kind of data exists
+    INSTANCE - a filled out form - real data from your machine
+    NAMESPACES = drawer - groups related info
+
+
+    foreach loops in pwsh
+    foreach ($item in $collection) {
+      Get-Help
+    }
+
+    while loops in pwsh
+
+
+
+
+    pwsh HTTP (still encrypted) 5985 HTTPS 5986 (TLS)
+      winRM (WS-Man) - allowed on windows server 2012 r2 and newer
+      kerberos is localized
+      non-krberos - WinRM uses NTLM - WinRM encrypts traffic by default
+
+      trusted host - used when no kerberos - reduces security
+
+      .NET api for direct.net access (specialized tasks) - unix
+      [System.Text.Encoding]::Unicode.GetBytes(
+      "This might be important"
+      )
+
+
+
+
+
+      takeaways:
+  pwsh is object-baed
+    cmdlets _ pipeelines = scalable automation
+    security defaults matter
+    
