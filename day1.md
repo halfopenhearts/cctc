@@ -8,9 +8,9 @@ day 1 lecture take away notes:
   cmdlet , param, arg
 
 
-    $_ -- current object flowing through a pipeline '|'
+  $_ -- current object flowing through a pipeline '|'
 
-    SIM -
+  SIM -
     CLASS - blue print or form . what kind of data exists
     INSTANCE - a filled out form - real data from your machine
     NAMESPACES = drawer - groups related info
@@ -26,14 +26,14 @@ day 1 lecture take away notes:
 
 
 
-    pwsh HTTP (still encrypted) 5985 HTTPS 5986 (TLS)
+  pwsh HTTP (still encrypted) 5985 HTTPS 5986 (TLS)
       winRM (WS-Man) - allowed on windows server 2012 r2 and newer
       kerberos is localized
       non-krberos - WinRM uses NTLM - WinRM encrypts traffic by default
 
-      trusted host - used when no kerberos - reduces security
+  trusted host - used when no kerberos - reduces security
 
-      .NET api for direct.net access (specialized tasks) - unix
+  .NET api for direct.net access (specialized tasks) - unix
       [System.Text.Encoding]::Unicode.GetBytes(
       "This might be important"
       )
