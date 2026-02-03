@@ -1,91 +1,88 @@
-MATTHEW_WILLIS,10.50.15.85
-download "omnisa" to rdp for homework
-powershell profiles - persistency 
+PowerShell Notes
+================
 
-day 1 lecture take away notes:
-  cmdlet pattern: verb-noun (singular noun)
-  usually starts with '-'
-  cmdlet , param, arg
+General Info
+------------
 
+Host: MATTHEW_WILLIS  
+IP: 10.50.15.85  
 
-  $_ -- current object flowing through a pipeline '|'
+Task:
+- Download OmniSA and access it via RDP for homework
 
-  SIM -
-    CLASS - blue print or form . what kind of data exists
-    INSTANCE - a filled out form - real data from your machine
-    NAMESPACES = drawer - groups related info
-
-
-    foreach loops in pwsh
-    foreach ($item in $collection) {
-      Get-Help
-    }
-
-    while loops in pwsh
+Focus:
+- PowerShell profiles
+- Persistence
 
 
+Day 1 — Lecture Takeaways
+------------------------
+
+PowerShell Basics
+- Cmdlet naming pattern: Verb-Noun (noun is singular)
+- Parameters usually start with '-'
+- Key terms:
+  - Cmdlet
+  - Parameter
+  - Argument
+
+Pipeline Object
+- $_
+  - Represents the current object flowing through the pipeline (|)
 
 
-  pwsh HTTP (still encrypted) 5985 HTTPS 5986 (TLS)
-      winRM (WS-Man) - allowed on windows server 2012 r2 and newer
-      kerberos is localized
-      non-krberos - WinRM uses NTLM - WinRM encrypts traffic by default
-
-  trusted host - used when no kerberos - reduces security
-
-  .NET api for direct.net access (specialized tasks) - unix
-      [System.Text.Encoding]::Unicode.GetBytes(
-      "This might be important"
-      )
+SIM Concepts
+- Class
+  - Blueprint or form describing what data exists
+- Instance
+  - A filled-out form containing real data from the system
+- Namespace
+  - Like a drawer that groups related information
 
 
+Loops in PowerShell
+
+Foreach Loop:
+foreach ($item in $collection) {
+    Get-Help
+}
+
+While Loop:
+- Used for repeated execution while a condition remains true
 
 
+PowerShell Remoting & Networking
+--------------------------------
 
-      takeaways:
-  pwsh is object-baed
-    cmdlets _ pipeelines = scalable automation
-    security defaults matter
+HTTP: 5985  
+HTTPS (TLS): 5986  
 
+WinRM (WS-Man):
+- Enabled on Windows Server 2012 R2 and newer
+- Uses Kerberos when available (localized authentication)
+- Falls back to NTLM when Kerberos is unavailable
+- Traffic is encrypted by default
 
-
-day 2
-
-- registry -
-  hives
-    keys
-      subkeys
-        values
-
-only two phyically stored as hive files::
-HKLM (local machine) - system wide
-HKU - all user profiles on system
-
-KHCU (current user) - active user content
-HKCC (current config) - current hardware profile
-HKCR (classes root) - file associations & COM objects
+Trusted Hosts:
+- Used when Kerberos is not available
+- Reduces overall security
 
 
+.NET API Usage
+--------------
 
-reg.exe - command line , repeatable fast changes , persistance and cleanup often happen
+- Used for direct .NET access and specialized tasks
+- Common in cross-platform or advanced scenarios
 
-powershell & the registry::
-HKLM AND HKCU: MOUNTED AUTOMATICALLY
-powershell registry accesed through PSDrives , cmdlets treat keys as items, values treated as properties, 
-
-example command::
-    Get-ChildItem HKLM:\SOFTWARE\Microcosoft\Windows\CurrentVersion\Run
-    Get-Item ..... ^
-
-
-run / RunOnce keys run @login , services run on boot
+Example:
+[System.Text.Encoding]::Unicode.GetBytes(
+    "This might be important"
+)
 
 
-registry artifacts ; left over cac cert
-HKLM\SYSTEM\CurentControlSet\Enum\... USB ...  ; device history example
+Key Takeaways (Day 1)
+--------------------
 
-
-
-
-
-
+- PowerShell is object-based
+- Cmdlets + pipelines enable scalable automation
+- Security defaults matter
