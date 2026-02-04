@@ -29,7 +29,7 @@ nft list tables
 sudo -l
 sudo -su
 apropos
-
+id
 
 variables
 -
@@ -73,3 +73,9 @@ example of a while loop
     echo "loop is running..."
     sleep 2
   done
+
+
+
+tools like xxd reveals file signatures/headers
+
+sticky bit - if its in my folder you cannot delete it unless youre the owner
