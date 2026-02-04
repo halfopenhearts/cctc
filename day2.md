@@ -103,6 +103,7 @@ ADS in NTFS
 - compatible with HFS+,NWFS
 
 NTFS
+-
 - attributes
 - security
 - main streams
@@ -115,9 +116,53 @@ they exist' to store icons, thumbnails, file attributes
 
 
 ADS example :: [filename]:[stream_name]:$DATA
+  -
   - removed when copied over to FAT32 , does not change hash
   - to put hidden data in : echo secret data > [filename]:[stream_name]
   - to read the hidden data use 'more < [filename]:[stream_name]
+
+ADS in directories
+  -
+  - mkdir kids
+  - echo hidden data > kids:hidden.txt
+  - dir /R kids
+  - more < kids:hidden.txt
+
+
+powershell - creating ADS
+  -
+  - set content reminder.txt -Value "secret" -stream secret.info
+  - get-childitem reminder.txt
+
+Enumeration of ADS
+  -
+  - get-item reminder.txt -stream *
+  - get-content reminder.txt -stream secret.info
+  - get-childitem C:\Users\CTF -Recurse -File | Get-Item -Stream * | Where Stream -ne ':$DATA'
+  - get-content file_path -stream hidden
+
+
+hash changes only occur when $DATA is modified
+
+operational takeaways
+   - ADSstandard file size and hask checks do not reveal ADS tampering , stealthy
+
+
+
+find users in reg
+wmic useraccount get name,sid
+reg query HKU
+
+
+Get-ChildItem -Recurse | Where-Object { $_.Name -eq "readme"}
+
+Get-ChildItem -Hidden -Force
+
+
+find stuff
+dir /a /s keyword**
+
+dir /r
 
 
 
