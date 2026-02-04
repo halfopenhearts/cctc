@@ -64,3 +64,12 @@ example of an if statement
     echo "target is not a file"
   fi
 
+example of a while loop
+  -
+  start=$(date + "%s")
+  end=$((start+10))
+
+  while [ $(date + "%s") -lt $end ]; do
+    echo "loop is running..."
+    sleep 2
+  done
