@@ -20,9 +20,15 @@
 ## 📅 Day Three
 **Topic:** Windows Registry & Alternate Data Streams  
 
-📄 Notes: [Linux](./day3.md)  
+📄 Notes: [Linux](./day5.md)  
 > **EOD:** 
+## 📅 Day Five
+**Topic:** Linux Boot process
 
+📄 Notes: [Linux](./day6.md)  
+> **EOD:** 
+## 📅 Day Six
+**Topic:** 
 
 Important persistance
 -
