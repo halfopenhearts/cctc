@@ -19,7 +19,7 @@ Task:
 
 Focus:
 - process validity
-- 
+- UAC
 
 
 
@@ -112,4 +112,37 @@ netstat -anob
 
 
 TCPView (gui tool)
+
+
+
+
+start of UAC (USER ACCOUNT CONTROL) - gatekeeping
+required interactive concent
+
+Registry key is located at "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+
+
+RISK CONTEXT
+Red - Application or publisher blocked by group policy
+Blue & gold - Administrative application
+Blue - Trusted and Authenticode signed application
+Yellow - Unsigned or signed but not trusted application
+
+
+sigcheck -m C:\Windows\System32\slui.exe
+strings -s C:\Windows\System32\*.exe | findstr /i autoelevate
+
+UAC bypass with fodhelper.exe
+  - > autoelevate binary
+    > user registry lookups
+    > exploits HKCU write acess
+
+
+is not created by default
+HKCU:\Software\Classes\ms-settings\shell\open\command
+
+
+
+
+
 
