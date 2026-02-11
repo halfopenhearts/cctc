@@ -1,1 +1,38 @@
 dll, powershell profiles, services, reg keys, linux bashrc, schtasks/crontab, DLL injection
+
+
+
+sys internals:
+shows malware persistence locations - autorun
+investigate processes procexp.exe
+investigate network connection attempts - tcpview
+view permissions - accesschk
+view and modify handles - handle
+service load order - loadOrder
+service name of Windows Defender Firewall - MpsSvc
+reports .dlls loaded into processes - listdlls
+
+
+/etc/systemd/system/*
+
+/lib/systemd/system/*
+
+/run/systemd/generator/*
+
+
+its a service thats not in english
+
+WHAT IS A NINE LINE
+Line 1: Location of pick-up site
+Line 2: Radio frequency
+Line 3: # of Patients by precedence
+Line 4: Equipment
+Line 5: Total # of patients
+Line 6: Security at pick-up site
+Line 7: Method of marking pick-up location
+Line 8: Patient nationality
+Line 9: NBC Contamination
+
+
+command will show service information - sc
+
