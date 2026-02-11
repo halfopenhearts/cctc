@@ -36,3 +36,8 @@ Line 9: NBC Contamination
 
 command will show service information - sc
 
+
+schtasks
+artifacts
+jump list
+prefetch
