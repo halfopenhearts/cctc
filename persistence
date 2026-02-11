@@ -41,3 +41,13 @@ schtasks
 artifacts
 jump list
 prefetch
+
+
+chrome history
+/C:/Users/student/AppData/Local/Google/Chrome/User Data/Default/Local Storage/leveldb/*.log
+
+
+
+
+
+
