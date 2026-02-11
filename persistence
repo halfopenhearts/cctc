@@ -48,6 +48,51 @@ chrome history
 
 
 
+Find the file in the jump list location that might allow privilege escalation.
+cd %APPDATA%\Microsoft\Windows\Recent\AutomaticDestinations
+  cd C:\Users\student\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations
+    dir -recurse
+      TYPE *<file>*
+      look for anything relating to a file and also it says: 
+        OS C:\users\student\Documents\UIDPWD.txt        Â X       Workstation_2
+      at the bottom of the type
 
 
+PS C:\Users\andy.dwyer> Get-EventLog -LogName System | ft -wrap | findstr /i flag
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+    3163 Mar 14 14:54  Information Microsoft-Windows-Dh        50037 DHCPv4 client service is stopped. ShutDown Flag value is 1
+    3160 Mar 14 14:54  Information Microsoft-Windows-DH        51047 DHCPv6 client service is stopped. ShutDown Flag value is 1
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+                                                                     the EventLogFlags W32time config setting if you wish to disable this
+    1817 Jan 02 21:34  Information Microsoft-Windows-Dh        50037 DHCPv4 client service is stopped. ShutDown Flag value is 1
+    1814 Jan 02 21:34  Information Microsoft-Windows-DH        51047 DHCPv6 client service is stopped. ShutDown Flag value is 1
+    1449 Feb 25 16:36  Information Microsoft-Windows-Dh        50037 DHCPv4 client service is stopped. ShutDown Flag value is 1
+    1445 Feb 25 16:36  Information Microsoft-Windows-DH        51047 DHCPv6 client service is stopped. ShutDown Flag value is 1
+                                                                     Flag is: 3v3nt_L0g'
+                                                                     STILL HAVE NOT found the Flag'
+    1057 Feb 23 21:54  Information Microsoft-Windows-Dh        50037 DHCPv4 client service is stopped. ShutDown Flag value is 1
+    1043 Feb 23 21:54  Information Microsoft-Windows-DH        51047 DHCPv6 client service is stopped. ShutDown Flag value is 1
+     922 Feb 23 21:52  Information Microsoft-Windows-Dh        50037 DHCPv4 client service is stopped. ShutDown Flag value is 1
+     919 Feb 23 21:52  Information Microsoft-Windows-DH        51047 DHCPv6 client service is stopped. ShutDown Flag value is 1
+     783 Jan 02 18:09  Information Microsoft-Windows-Dh        50037 DHCPv4 client service is stopped. ShutDown Flag value is 1
+     781 Jan 02 18:09  Information Microsoft-Windows-DH        51047 DHCPv6 client service is stopped. ShutDown Flag value is 1
+PS C:\Users\andy.dwyer>
 
