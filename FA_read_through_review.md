@@ -278,22 +278,57 @@ It opens a new regedit.exe window with system permissions
   Cannot be disabled.
   [filename.extension]:[alternate_stream_name]:$DATA
 
-Windows Boot CTFd Challenges
+
+```
+C:\windows\system32>more < reminder.txt:secret.info # 1
+social security numbers
+
+C:\windows\system32>notepad reminder.txt:secret.info # 2
+
+C:\windows\system32>dir /R reminder.txt # 3
+ Directory of C:\windows\system32
+ 02/27/2021 07:13 PM                   23 reminder.txt
+                                       26 reminder.txt:secret.info:$DATA
+                1 File(s)              23 bytes
+                0 Dir(s)   20,060,557,312 bytes free
+
+C:\windows\system32>type reminder.txt:secret.info # 4
+The filename, directory name, or volume label syntax is incorrect.
+```
+```
+C:\windows\system32>mkdir kids # 1
+
+C:\windows\system32>echo top-secret information > kids:hidden.txt # 2
+
+C:\windows\system32>dir /R kids # 3
+ Directory of C:\windows\system32\kids
+ 02/27/2021 07:29 PM      <DIR>           .
+                                       25 .:hidden.txt:$DATA
+ 02/27/2021 07:29 PM      <DIR>           ..
+               0 File(s)                0 bytes
+               2 Dir(s)    20,060,160,000 bytes free
+
+C:\windows\system32>more < kids:hidden.txt # 4
+top-secret information
+```
+
+
+Windows Boot
   Describe the Windows Boot Process
   Identify the Windows Logon Process
   Discuss Analyzing Boot Configurations with BCDEdit
 
-Linux Boot CTFd Challenges
+Linux Boot
   Describe the Linux Boot Process
   Identify the Linux Logon Process
 
-Windows Process Validity CTFd Challenges
+Windows Process Validity
   Describe Windows Processes
   Identify Valid Windows Processes
   Discuss Commands to Enumerate Processes
   Identify Processes Executed from Scheduled Tasks
 
-Windows User Account Control CTFd Challenges
+Windows User Account Control
   Describe User Account Control Bypass
   Identify User Account Control Activity
 
@@ -301,28 +336,28 @@ Terminal Learning Objectives
   Identify SysInternals Tools to Enumerate Systems
   Identify SysInternals Tools to Analyze Processes
 
-Linux Process CTFd Challenges
+Linux Process
   Describe Linux Processes
   Identify Valid Linux Processes
   Discuss Commands to Enumerate Processes
 
-Windows Auditing & Logging CTFd Challenges
+Windows Auditing & Logging
   Identify Windows Artifacts
   Describe Windows Auditing & Logging
 
-Linux Auditing & Logging CTFd Challenges
+Linux Auditing & Logging
   Describe the Advantages and Disadvantages of Auditing & Logging
   Identify Auditing Activities
   Identify Actions that Contribute to Log Files
   Identify Linux Log Types
 
 
-Memory Analysis CTFd Challenges
+Memory Analysis
   Describe Memory Analysis
   Describe Order of Collecting Volatile Data
 
 
-Active Directory CTFd Challenges
+Active Directory
   Identify Active Directory Enumeration
   Describe Active Directory User Enumeration
   Describe Active Directory Group Enumeration
