@@ -34,8 +34,9 @@ to switch back type exit and get version again
 ```
 
 ```powershell help
-
+```
 Get-Content -Path "C:\\Test Files\\content.txt" #Displays the contents of the file 
+```
 Get-Variable #Displays current Variables 
 Get-Verb #List the PowerShell verbs Get-Command #List the PowerShell cmdlets
 Get-Command -Type Cmdlet | Sort-Object -Property Noun | Format-Table -GroupBy Noun #Get cmdlets and display them in order 
