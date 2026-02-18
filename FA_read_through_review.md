@@ -6,6 +6,20 @@ Windows PowerShell CTFd Challenges
   Identify Various Components of Windows Remoting
   Discuss PowerShell Profiles
 
+  
+
+
+```
+get-variable # will find where variables are located
+
+
+All Users, All Hosts	$PSHOME\Profile.ps1
+All Users, Current Host	$PSHOME\Microsoft.PowerShell_profile.ps1
+Current User, All Hosts	$HOME\Documents\WindowsPowerShell\Profile.ps1
+Current User, Current Host	$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+
+```
+
 ``` example of switching from ps ver 5.1 to and from ps ver 7.3
 what version am i using
   get-host | select-object Version
