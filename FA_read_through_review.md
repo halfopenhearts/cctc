@@ -2,9 +2,9 @@ Exam 1 - 100 points max - 10 questions - 70% required to pass
 
 
 Windows PowerShell CTFd Challenges
-  Discuss Commands Used in PowerShell
-  Identify Various Components of Windows Remoting
-  Discuss PowerShell Profiles
+  - Discuss Commands Used in PowerShell # common commands listed within the FA below
+  - Identify Various Components of Windows Remoting # ssh / mobaxterm
+  - Discuss PowerShell Profiles # all users, all hosts
 
   
 
