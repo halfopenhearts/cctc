@@ -510,6 +510,254 @@ Active Directory
 
 
 
+collobarative effots
 
+
+--------------------------------WINDOWS PERSISTENCE COMMANDS--------------------------------------------------------
+1. Registry Run Keys (Most Common)
+PowerShell
+# System-wide persistence
+reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
+reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce"
+
+# Per-user persistence
+reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Run"
+reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce"
+
+# All users (requires admin)
+reg query "HKU" /s | findstr Run
+------------------------------------------------------------------------------------------------------------------
+2. Services (Persistence via Registry)
+PowerShell
+# List all services and their startup type
+Get-Service | Format-Table -Property Name, DisplayName, StartType
+
+# Detailed service info including binary path
+Get-WmiObject win32_service | Select-Object Name, DisplayName, PathName, StartMode
+
+# Services with suspicious paths (non-system directories)
+Get-WmiObject win32_service | Where-Object {$_.PathName -notlike "C:\Windows*"} | Select-Object Name, PathName
+
+# View service registry path and ImagePath
+reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s | findstr ImagePath
+---------------------------------------------------------------------------------------------------------------------
+3. Startup Folder
+PowerShell
+# All users startup
+Get-ChildItem "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
+
+# Current user startup
+Get-ChildItem "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup"
+--------------------------------------------------------------------------------------------------------------------
+4. Scheduled Tasks
+PowerShell
+# All scheduled tasks
+Get-ScheduledTask
+
+# Detailed info with triggers
+Get-ScheduledTask | Get-ScheduledTaskInfo | Format-List *
+
+# Tasks in specific folders
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\*" -ErrorAction SilentlyContinue
+
+# Export all tasks to check execution paths
+Get-ScheduledTask | Export-ScheduledTask
+---------------------------------------------------------------------------------------------------------------------
+5. WMI Event Subscriptions
+PowerShell
+# List all WMI event subscriptions (used for fileless persistence)
+Get-WmiObject __EventFilter -Namespace root\subscription
+Get-WmiObject __EventConsumer -Namespace root\subscription
+Get-WmiObject __FilterToConsumerBinding -Namespace root\subscription
+----------------------------------------------------------------------------------------------------------------------
+6. AppInit DLLs (DLL Injection)
+PowerShell
+reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Windows" /v AppInit_DLLs
+reg query "HKCU\Software\Microsoft\Windows NT\CurrentVersion\Windows" /v AppInit_DLLs
+----------------------------------------------------------------------------------------------------------------------
+7. Shell Extensions & Context Menu
+PowerShell
+reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers"
+reg query "HKLM\Software\Classes\*\shellex\ContextMenuHandlers"
+----------------------------------------------------------------------------------------------------------------------
+8. PowerShell Profiles
+PowerShell
+# PowerShell profiles (auto-executed on shell start)
+$PROFILE  # Current user profile
+$PSHOME\Profile.ps1  # All users, all hosts
+
+# Check all profile locations
+Get-Item "$PSHOME\Profile.ps1"
+Get-Item "$PSHOME\Microsoft.PowerShell_profile.ps1"
+Get-Item "$HOME\Documents\WindowsPowerShell\Profile.ps1"
+Get-Item "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+-------------------------------------------------------------------------------------------------------------------------
+9. Browser Extensions & Helpers
+PowerShell
+# Chrome extensions
+Get-ChildItem "C:\Users\*\AppData\Local\Google\Chrome\User Data\*\Extensions"
+
+# Firefox extensions
+Get-ChildItem "C:\Users\*\AppData\Roaming\Mozilla\Firefox\Profiles\*\extensions"
+---------------------------------------------------------------------------------------------------------------------------
+10. Winlogon
+PowerShell
+reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
+# Check for: Userinit, Shell, GinaDLL, Notify keys
+--------------------------------------------LINUX PERSISTENCE COMMANDS-------------------------------------------------------
+SYSTEMD Systems (Modern Linux)
+1. Systemd Services
+bash
+# List all services
+systemctl list-units --type=service
+
+# Show all services (including disabled)
+systemctl list-units --type=service --all
+
+# List services in specific directory
+ls -la /lib/systemd/system/
+ls -la /etc/systemd/system/
+
+# Check service details
+systemctl status servicename
+systemctl cat servicename  # Shows service file content
+
+# Find suspicious services (non-standard locations)
+find /lib/systemd/system /etc/systemd/system -type f -newermt "30 days ago"
+----------------------------------------------------------------------------------------------------------------------------------
+2. Systemd Timers
+bash
+# List all timers (systemd equivalent of cron)
+systemctl list-timers --all
+
+# Show timer details
+systemctl cat timer-name.timer
+
+# Check timer execution
+journalctl -u timer-name.service
+-----------------------------------------------------------------------------------------------------------------------------------
+3. Systemd User Services
+bash
+# User-level services (run as specific user)
+systemctl --user list-units --type=service
+
+# User service directory
+ls -la ~/.config/systemd/user/
+-----------------------------------------------------------------------------------------------------------------------------------
+4. Default Target & Unit Dependencies
+bash
+# Check default target (similar to runlevel)
+ls -la /lib/systemd/system/default.target
+cat /lib/systemd/system/default.target
+
+# Check unit dependencies
+systemctl list-dependencies
+
+# Multi-user target services
+systemctl list-dependencies multi-user.target
+----------------------------------------SYSV INIT Systems (Older Linux)---------------------------------------------------------------
+1. Init Scripts
+bash
+# List init scripts
+ls -la /etc/rc*.d/
+
+# Check specific runlevel (commonly 3=multiuser, 5=GUI)
+ls -la /etc/rc3.d/
+
+# View init script content (S=start, K=kill)
+cat /etc/rc3.d/S99mystartup
+---------------------------------------------------------------------------------------------------------------------------------------
+2. Inittab Configuration
+bash
+# Check default runlevel and init configuration
+cat /etc/inittab
+
+# Respawn processes defined in inittab
+grep respawn /etc/inittab
+---------------------------------------------------------------------------------------------------------------------------------------
+3. Init Process
+bash
+# Check what init system is being used
+ls -l /proc/1/exe
+# If it points to /usr/lib/systemd/systemd = systemd
+# If it points to /sbin/init = SysV init
+
+------------------------------------------CROSS-PLATFORM LINUX PERSISTENCE-------------------------------------------------------------
+Cron Jobs (Works on Both SystemD & SysV)
+bash
+# System cron jobs
+cat /etc/crontab
+ls -la /etc/cron.d/
+
+# Per-user cron jobs
+ls -la /var/spool/cron/crontabs/
+crontab -l  # Current user
+sudo crontab -l -u username  # Specific user
+
+# Cron job directories
+/etc/cron.daily/
+/etc/cron.hourly/
+/etc/cron.weekly/
+/etc/cron.monthly/
+------------------------------------------------Shell Profiles (Executed on Login)---------------------------------------------------------
+bash
+# System-wide profiles
+cat /etc/profile
+cat /etc/bash.bashrc
+ls -la /etc/profile.d/
+
+# User profiles
+cat ~/.profile
+cat ~/.bashrc
+cat ~/.bash_profile
+cat ~/.bash_login
+--------------------------------------------------SSH Keys & Authorized Access--------------------------------------------------------------
+bash
+# SSH keys for persistence
+ls -la ~/.ssh/authorized_keys
+ls -la /root/.ssh/authorized_keys
+
+# Check all user SSH keys
+find /home -name authorized_keys 2>/dev/null
+find /root -name authorized_keys 2>/dev/null
+----------------------------------------------Kernel Modules (Rootkit Persistence)------------------------------------------------------------
+bash
+# List loaded kernel modules
+lsmod
+
+# Kernel module directory
+ls -la /lib/modules/$(uname -r)/kernel/
+
+# Check for suspicious modules
+cat /proc/modules
+--------------------------------------------------GRUB Boot Configuration------------------------------------------------------------------------
+bash
+# Boot configuration
+cat /boot/grub/grub.cfg
+
+# Check for boot hooks
+ls -la /etc/grub.d/
+
+# MBR verification
+sudo xxd -l 512 -g 1 /dev/sda
+--------------------------------------------DETERMINE INIT SYSTEM (CRITICAL FOR LINUX)-------------------------------------------------------------
+bash
+# Method 1: Check /proc/1/exe
+ls -l /proc/1/exe
+
+# Method 2: Check systemctl availability
+systemctl --version
+
+# Method 3: Check common files
+[ -f /etc/systemd/system-generators ] && echo "systemd" || echo "SysV"
+
+# Method 4: ps command
+ps -p 1 -o comm=
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Output Interpretation:
+/usr/lib/systemd/systemd or /lib/systemd/systemd = SYSTEMD
+/sbin/init or /bin/init = SYSV INIT
+User Login|PowerShell profiles|shell profiles|
+System Hooks|WMI, Winlogon|kernel modules
 
   
