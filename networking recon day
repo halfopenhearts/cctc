@@ -1,0 +1,6 @@
+
+SSGT METHODOLOGY 
+step one - traceroute , nmap scan 21-23,80 , bannergrab (-sV) , wget -r , login
+step two - shared drive /user/share/cctc , ipconfig / ip addr , ip neigh , aro , tasklist , ps -elf , whoami, ss
+step two - scan the subnet within that boxxx - ping scan / nmap / nc
+step four - repeat
