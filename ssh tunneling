@@ -40,3 +40,7 @@ nc ip@port
 
 
 proxychains wget -r http://192.168.1.39/
+
+
+nmap -sU -sV -T4 -n --top-ports 200 <target>
+nmap -sU -sV -sC -p- --max-retries 3 <target>
