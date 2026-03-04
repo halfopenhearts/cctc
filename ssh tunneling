@@ -28,5 +28,15 @@ ssh -L <local bind port>:<tgt ip>:<tgt port> -p <alt port> <user>@<server ip>
 
 Internet_Host:
 ssh student@172.16.1.15 -L 1123:localhost:23
-or
-ssh -L 1123:localhost:23 student@172.16.1.15
+
+
+
+dynamic tunnel
+to get tools on Sokka we did
+ssh blah@ip -D 9050
+
+banner grabbing 
+nc ip@port
+
+
+proxychains wget -r http://192.168.1.39/
