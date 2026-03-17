@@ -1,3 +1,86 @@
 ssh demo1@10.50.12.21 -L1111:10.208.50.61:80
 Stack Number	Username	Password	jump
 15 	MAWI-M-503 	EkXBJpSgYSJm 	10.50.16.1
+
+for i in {1..255}; do (ping -c 1 10.50.12.$i | grep 'bytes from' &); done
+nmap -p 53 --script dns* 10.50.12.22-24
+nmap -p 80 --script http-enum 10.50.12.22-24
+
+
+for i in {96..128}; do proxychains nc -nvzw1 12.168.NetID.$i 22 53 80 135 137 139 445 2>&1 | grep OK | grep -Eo "192.168.NetID.:[0-9]" ; done
+
+ssh -MS /tmp/jump demo1@10.50.12.21
+ssh -S /tmp/jump jump -O forward -D 9050
+ssh -S /tmp/jump jump -O forward -L1111:10.50.12.21:22 -L1112:20.50.12.21:80
+ssh -S /tmp/jump jump -O cancel -L1111:10.50.12.21:22 -L1112:20.50.12.21:80
+
+Data to Collect
+Web Data
+
+Sensitive Data
+
+Publicly Accessible
+
+Social Media
+
+Domain and IP Data
+
+Data to Collect
+Web Data
+
+Cached Content, Analytics, Proxy Web Application, Command Line Interrogation
+
+Sensitive Data
+
+Business Data, Profiles, Non-Profits/Charities, Business Filings, Historical and Public Listings
+
+Publicly Accessible
+
+Physical Addresses, Phone Numbers, Email Addresses, User Names, Search Engine Data, Web and Traffic Cameras, Wireless Access Point Data
+
+Social Media
+
+Twitter, Facebook, Instagram, People Searches, Registry and Wish Lists
+
+Domain and IP Data
+
+DNS Registration, IP Address Assignments, Geolocation Data, Whois
+
+Hyper-Text Markup Language (HTML)
+Standardized markup language for browser interpretation of webpages
+
+
+
+Client-side interpretation (web browser)
+
+Utilizes elements (identified by tags)
+
+Typically redirects to another page for server-side interaction
+
+Cascading Stylesheets (CSS) for page theming
+
+
+
+
+
+
+
+
+
+
+
+# Run specific script or category
+nmap --script <filename>|<category>|<directory>
+
+# Get help for specific scripts
+nmap --script-help "ftp-* and discovery"
+
+# Pass arguments to scripts
+nmap --script-args <args>
+nmap --script-args-file <filename>
+
+# Get help for scripts
+nmap --script-help <filename>|<category>|<directory>
+
+# Enable script tracing for debugging
+nmap --script-trace
