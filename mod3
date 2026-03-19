@@ -123,7 +123,25 @@ to verify port works: nc 127.0.0.1 42071
 
 
 
+``` 
+**how to connect to web exploitation**
+10.100.28.40
+80 // 4444
+/home/student/.ssh/id_rsa.pub
 
+
+ssh -MS /tmp/jmp student@10.50.16.1
+ssh -S /tmp/jmp student@10.50.16.1
+ssh -S /tmp/jmp jmp -O forward -L 50000:10.100.28.40:80
+ssh -S /tmp/jmp jmp -O forward -L 51000:10.100.28.40:4444
+ssh -S tmp/jmp -i /home/student/.ssh/id_rsa.pub billybob@127.0.0.1 -p 51000
+
+ssh -MS /tmp/jmp student@pivot
+ssh -S /tmp/jmp student@pivot
+ssh -S /tmp/jmp jmp -O forward -L 50000:target:80
+ssh -S /tmp/jmp jmp -O forward -L 51000:target:4444
+ssh -S tmp/jmp -i /home/student/.ssh/id_rsa.pub billybob@127.0.0.1 -p 51000
+```
 
 
 
