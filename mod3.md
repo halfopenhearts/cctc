@@ -314,21 +314,47 @@ A `stack canary` (or stack cookie) is a random, hidden value placed on the progr
 
 
 
+gunny notes
+// download func..
 
+// static analysis
+// strings func
+// file func
+from this we know it wants a string, is an ELF 32 bit
 
+// behavioral analysis
+// chmod u+x file
+// run it
+// command substitution
 
+ // determine what its expecting: some form of user input 
+ // assigning some form of param. to the file input
+ // ./func $(echo "12345")
+ // nothing happens: its still asking for a string
+ // user input:
+ // ./func <<<$(echo "12345")
+ // pushes the string into the input
 
+// dynamic analysis
+//fuzzing
+ // ./func <<<$(echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+ // looking for seg fault
 
+// gdb ./func
+// 'shell' to exit 'exit' will pop us back into gdb
+// 'info functions' shows all functions in the program
+// 'run' will run the program in gdp
+// 'ctrl + c' to terminate
+// run 'info functions' after this for more output
 
-
-
-
-
-
-
-
-
-
+// disassembly (still in gdb) # looks for vulnerabilities 
+// green -> addition part of the program being run
+// ignore anything with __ or x86 -> rabbit hole
+ //pdisass main
+// pdisass <new function call>
+// example: pdisass getuserinput
+// you should see red -> vulnerable function
+// yellow -> address allocation within the stack
 
 
 
