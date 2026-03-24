@@ -287,6 +287,52 @@ UNION SELECT table_schema,table_name,column_name FROM information_schema.columns
 
 
 
+Determine Vulnerable Code
+What are functions?
+
+How can a function be vulnerable?
+
+C Code Example:
+
+gets() -> fgets()
+strcpy() -> strncpy()
+strcat() -> strncat()
+sprintf() -> snprintf()
+
+
+
+
+
+
+A `stack canary` (or stack cookie) is a random, hidden value placed on the program stack during function execution, located just before the return pointer. It acts as a tripwire to detect stack buffer overflows; if the value changes (overwritten), the program crashes to prevent exploitation. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
