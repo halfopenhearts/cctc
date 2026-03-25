@@ -471,7 +471,7 @@ static analysis
 havioral analysis
  // RUN IT
  // netstat -anob
- // get-rpcoess | findstr /i vuln
+ // get-process | findstr /i vuln
  
 dynamic analysis
  // open immunity debugger as admin.
@@ -483,40 +483,47 @@ dynamic analysis
 
 go to linux box
   // i named by file winbuff.py
-  
+ 
+<img width="588" height="585" alt="{B801876B-6B59-416B-8B9F-E17F5B754D29}" src="https://github.com/user-attachments/assets/59a2e37e-6bf3-4ef8-afe3-e445eb4477e4" />
+
+ // changed `buf` to "TRUN /.:/"
+ start our fuzzing
+ // added a variable: `buf += "A" * 5000
+ // rewind immunity again and press play
+
+when ran our EIP changes to 41414141
+go to wiremask again , change length to 5000 , copy the pattern into the `buf += "pattern"` without the multiplier
+
+// rewind immunity again and press play
+
+<img width="783" height="293" alt="{BC996539-0C83-4C40-B1D8-5CFD88B17BFE}" src="https://github.com/user-attachments/assets/789d4aaf-1a05-4951-acac-acc488cea2f5" />
 
 
+// run the script again, get new EIP from immunity
+// copy the NEW EIP into the registry offset on wiremask, find offset
+// add the 4 B's into a buf += "b" * 4
+<img width="768" height="291" alt="{A090398B-3D82-4FA2-8193-F721AB1F191A}" src="https://github.com/user-attachments/assets/5729d66b-e4c2-467e-aff8-c1a37afe7b87" />
+
+ctrl + k in nano to delete a line
 
 
-<img width="506" height="239" alt="{8C9B1F56-8D77-446D-BEF2-0E1CD2B41FA9}" src="https://github.com/user-attachments/assets/77f293f3-a883-4d30-8822-c89e998e15c0" />
+run and the EIP should be 42424242 - > you successfuly overwrote
+
+time to find jump ESP location
+.. bottom left of the screen theres a search box.. type in: `!mona modules`
+this will search for unprotected dll's
+<img width="1037" height="168" alt="{6CBF2C8E-D900-4236-A6B1-B897E3C6D266}" src="https://github.com/user-attachments/assets/99de257d-b3d3-443c-9255-c3a884cff5a9" />
 
 
+looking for ALL FALSE. -> essfunc.dll
+
+search for jump esp locations within the dll you located
+the next mona command is `!mona jmp -r esp -m "essfunc.dll"`
 
 
+<img width="1036" height="101" alt="image" src="https://github.com/user-attachments/assets/8ba1f069-8fd3-473e-9a55-511a41f27609" />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+copy the first couple of them down and convert them
 
 
 
