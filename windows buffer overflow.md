@@ -107,4 +107,4 @@ go back to windows, rewind, press play, check security settings
 run the python script on linux, check msfconsole
 <img width="780" height="124" alt="{9F865A9E-3937-4E69-AA46-CBA9E6DE12F9}" src="https://github.com/user-attachments/assets/3c6d9abe-d504-45ff-803f-63c2ec662f9b" />
 
-
+once in type `shell`
