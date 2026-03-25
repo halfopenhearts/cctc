@@ -441,6 +441,108 @@ run again `./func <<<$(python ./func.py)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+windows buffer overflow
+
+turn anti virus off
+
+static analysis
+ // run powershell as admin, cd to dir of vuln server file
+ // strings.exe vulnserver.exe
+ // GUI > Properties
+
+
+havioral analysis
+ // RUN IT
+ // netstat -anob
+ // get-rpcoess | findstr /i vuln
+ 
+dynamic analysis
+ // open immunity debugger as admin.
+ // run vulnserver and attach it
+ // eip top right
+ // click rewind, top left; click play, top left
+ // verify windows defender is off
+
+
+go to linux box
+  // i named by file winbuff.py
+  
+
+
+
+
+<img width="506" height="239" alt="{8C9B1F56-8D77-446D-BEF2-0E1CD2B41FA9}" src="https://github.com/user-attachments/assets/77f293f3-a883-4d30-8822-c89e998e15c0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Data to Collect
 Web Data
 
