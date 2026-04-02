@@ -27,6 +27,15 @@ linex: 4
 binary: 4
 exdev: 3
 webex: 1
+
+**new one**
+postex 11 **
+winex 6
+recon 4
+sql 4 **
+linex 4
+binary 4
+exdev 4
 ```
 post ex, look in tmp /var/tmp /home/ , process list /etc/rsyslog* , 
 'uname -a 4.15.0.213-generic'
